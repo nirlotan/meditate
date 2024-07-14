@@ -50,6 +50,7 @@ df_selected = df[(df['category'].isin(selected_categories))&
 event = st.dataframe(
     df_selected[['title','author','duration']],
     on_select='rerun',
+    hide_index = True,
     selection_mode='single-row',
     use_container_width=True
 )
@@ -57,4 +58,4 @@ event = st.dataframe(
 if len(event.selection['rows']):
     youtube_url = df_selected['youtube_url'].iloc[event.selection['rows'][0]]  
     st.video(youtube_url)
-
+    st.link_button(f"For more videos by {df_selected['author'].iloc[event.selection['rows'][0]]}", f"{df_selected['channel'].iloc[event.selection['rows'][0]]}")
