@@ -13,10 +13,8 @@ df = read_data()
 min_duration = df['duration'].min()
 max_duration = df['duration'].max()
 
-cols = st.columns(3)
-
 categories = pd.DataFrame(df['category'].unique(),columns=['Category'])
-category_selection = cols[0].dataframe(categories,
+category_selection = st.sidebar.dataframe(categories,
                                   on_select='rerun',
                                   hide_index = True,
                                   selection_mode = "multi-row",
@@ -28,7 +26,7 @@ else:
 
 sub_categories = pd.DataFrame(df[df['category'].isin(selected_categories)]['sub_category'].unique(),columns=['SubCategory'])
 
-subcategory_selection = cols[1].dataframe(sub_categories,
+subcategory_selection = st.sidebar.dataframe(sub_categories,
                                   on_select='rerun',
                                   hide_index = True,
                                   selection_mode = "multi-row",
