@@ -59,5 +59,9 @@ event = st.dataframe(
 
 if len(event.selection['rows']):
     youtube_url = df_selected['youtube_url'].iloc[event.selection['rows'][0]]  
-    st_player(youtube_url)
+    screen_width = streamlit_js_eval(js_expressions='screen.width', key = 'SCD') / 4
+    st.markdown(
+        f'<iframe width="{screen_width}" height="{screen_width*2/3}" src="{youtube_url}" frameborder="0" allow="picture-in-picture" allowfullscreen></iframe>',
+        unsafe_allow_html=True
+    )
 
