@@ -1,4 +1,2 @@
 streamlit
 pandas
-streamlit-player
-streamlit_js_eval
