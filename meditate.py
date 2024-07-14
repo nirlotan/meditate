@@ -1,6 +1,18 @@
 import streamlit as st
-import time
 import pandas as pd
+import yt_dlp
+
+def get_audio_url(video_url):
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'quiet': True,
+        'no_warnings': True,
+    }
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        info_dict = ydl.extract_info(video_url, download=False)
+        audio_url = info_dict['url']
+        title = info_dict['title']
+    return audio_url
 
 @st.cache_data
 def read_data():
@@ -60,6 +72,16 @@ event = st.dataframe(
 if len(event.selection['rows']):
     youtube_url = df_selected['youtube_url'].iloc[event.selection['rows'][0]]
     with st.container(border=True):
-        st.text('placeholder')
-        st.video(youtube_url)
+        if st.checkbox("Audio only"):
+            audio_url = get_audio_url(youtube_url)
+
+            # Embed the audio player
+            st.markdown(f"""
+                <audio controls autoplay>
+                    <source src="{audio_url}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                """, unsafe_allow_html=True)
+        else:
+            st.video(youtube_url)   
 
