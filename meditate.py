@@ -72,7 +72,7 @@ event = st.dataframe(
 if len(event.selection['rows']):
     youtube_url = df_selected['youtube_url'].iloc[event.selection['rows'][0]]
     with st.container(border=True):
-        if st.checkbox("Audio only"):
+        if False:#st.checkbox("Audio only"):
             audio_url = get_audio_url(youtube_url)
 
             # Embed the audio player
