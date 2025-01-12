@@ -8,6 +8,7 @@ def read_data():
     return df
 
 selected_media = False
+selected_sub_categories = []
 df = read_data() 
 
 min_duration = df['duration'].min()
