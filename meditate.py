@@ -19,7 +19,7 @@ selected_categories = st.segmented_control("Select Category", categories, select
 sub_categories = pd.DataFrame(df[df['category'].isin(selected_categories)]['sub_category'].unique(),columns=['SubCategory'])
 
 if len(sub_categories) > 0:
-    subcategory_selection = st.segmented_control("Select SubCategory", selected_categories, selection_mode="multi")
+    selected_sub_categories = st.segmented_control("Select SubCategory", selected_categories, selection_mode="multi")
 
 duration_selection = st.slider("Duration", min_value=min_duration, 
               max_value=max_duration, value=(min_duration,max_duration)),
