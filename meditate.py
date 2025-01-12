@@ -17,10 +17,8 @@ categories = pd.DataFrame(df['category'].unique(),columns=['Category'])
 
 selected_categories = [st.segmented_control("Select Category", categories, selection_mode="single",default=categories.iloc[0])]
 
-min_duration = df['duration'].min()
 max_duration = df['duration'].max()
 if selected_categories[0]:
-    min_duration = df[df['category'].isin(selected_categories)]['duration'].min()
     max_duration = df[df['category'].isin(selected_categories)]['duration'].max()
 
 sub_categories = pd.DataFrame(df[df['category'].isin(selected_categories)]['sub_category'].unique(),columns=['SubCategory'])
@@ -29,8 +27,8 @@ if len(sub_categories) > 0:
     selected_sub_categories = st.segmented_control("Select SubCategory", sub_categories, selection_mode="multi",
                                                                         default = sub_categories)
 
-duration_selection = st.slider("Duration", min_value=min_duration,
-              max_value=max_duration, value=(min_duration,max_duration)),
+duration_selection = st.slider("Duration", min_value=0,
+              max_value=max_duration, value=(0,max_duration)),
 
 df_selected = df[(df['category'].isin(selected_categories))&
                  (df['duration']>=duration_selection[0][0])&
