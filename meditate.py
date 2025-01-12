@@ -49,7 +49,7 @@ if df_selected.shape[0]>0:
                           description = f"{item['author']} - {item['duration']} {minutes_text}",
             ))
 
-    selected_item = sac.menu(selection_menu, size='sm', index=random.randint(0, len(selection_menu) - 1))
+    selected_item = sac.menu(selection_menu, size='sm')
 
     item = df_selected[df_selected['title'] == selected_item].iloc[0]
     youtube_url = item['youtube_url']
