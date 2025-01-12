@@ -14,11 +14,15 @@ min_duration = df['duration'].min()
 max_duration = df['duration'].max()
 
 categories = pd.DataFrame(df['category'].unique(),columns=['Category'])
+"""
 category_selection = st.sidebar.dataframe(categories,
                                   on_select='rerun',
                                   hide_index = True,
                                   selection_mode = "multi-row",
                                   )
+"""
+category_selection = st.segmented_control("Category", categories, selection_mode="multi")
+
 if len(category_selection.selection['rows']):
     selected_categories = [categories['Category'].iloc[row] for row in category_selection.selection['rows']]
 else:
