@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import streamlit_antd_components as sac
 
 @st.cache_data
 def read_data():
@@ -32,6 +33,12 @@ df_selected = df[(df['category'].isin(selected_categories))&
                  (df['sub_category'].isin(selected_sub_categories))
                 ]
 
+
+selected_item = sac.menu([
+    sac.MenuItem('מדיטציה לבוקר - מיקוד, בהירות והשראה ליום חדש - 10 דקות', icon='play-btn-fill', description='יוגה עם סופיה'),
+
+])
+st.write(selected_item)
 
 event = st.dataframe(
     df_selected[['title','author','duration']],
