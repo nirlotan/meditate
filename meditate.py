@@ -21,13 +21,13 @@ category_selection = st.sidebar.dataframe(categories,
                                   selection_mode = "multi-row",
                                   )
 """
-category_selection = st.segmented_control("Category", categories, selection_mode="multi")
-
+selected_categories = st.segmented_control("Category", categories, selection_mode="multi")
+"""
 if len(category_selection.selection['rows']):
-    selected_categories = [categories['Category'].iloc[row] for row in category_selection.selection['rows']]
+    selected_categories = [categories['Category'].iloc[row] for row in category_selection]
 else:
     selected_categories = categories['Category'].values
-
+"""
 sub_categories = pd.DataFrame(df[df['category'].isin(selected_categories)]['sub_category'].unique(),columns=['SubCategory'])
 
 subcategory_selection = st.sidebar.dataframe(sub_categories,
